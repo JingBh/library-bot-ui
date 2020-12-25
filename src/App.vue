@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="indigo" dark>
       <v-app-bar-title>
         {{ title }}
       </v-app-bar-title>
@@ -18,8 +18,10 @@
 
     </v-app-bar>
 
-    <v-main>
-      <router-view />
+    <v-main class="grey lighten-4">
+      <v-container style="max-width: 50rem;">
+        <router-view />
+      </v-container>
     </v-main>
   </v-app>
 </template>
