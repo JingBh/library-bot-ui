@@ -7,14 +7,20 @@
   >
     <span>{{ title }}</span>
     <v-spacer />
-    <v-icon v-if="network">
+    <v-icon
+      v-if="network"
+      class="mx-1"
+    >
       {{ network }}
     </v-icon>
-    <span v-if="battery">
+    <span
+      v-if="battery"
+      class="mx-1"
+    >
       <v-icon>{{ battery }}</v-icon>
       <span
         v-if="batteryPercent"
-        class="ml-n1 mr-2"
+        class="ml-n1 mr-1"
       >{{ batteryPercent }}%</span>
     </span>
     <span>{{ time }}</span>
