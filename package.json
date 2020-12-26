@@ -1,9 +1,12 @@
 {
   "name": "library-bot-ui",
   "version": "0.1.0-dev",
-  "license": "GPL-3.0-or-later",
-  "title": "图书馆室内引导机器人",
   "private": true,
+  "description": "UI of the Library Guiding Bot project.",
+  "author": {
+    "name": "JingBh",
+    "email": "jingbohao@yeah.net"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -64,10 +67,14 @@
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
+  "homepage": "https://github.com/JingBh/library-bot-ui",
+  "license": "GPL-3.0-or-later",
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "repository": "github:JingBh/library-bot-ui",
+  "title": "图书馆室内引导机器人"
 }

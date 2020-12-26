@@ -47,25 +47,25 @@ export default class SystemBar extends Vue {
 
   updateBattery () {
     if (process.type === 'renderer') {
-      import('electron').then(({ ipcRenderer }) => {
-        ipcRenderer.invoke('get-battery').then((result: {
-          hasbattery: boolean;
-          ischarging: boolean;
-          percent: number;
-        }) => {
-          if (result.hasbattery) {
-            this.batteryPercent = result.percent
-            const baseIconNumber = Math.floor(result.percent / 10) * 10
-            const baseIcon = baseIconNumber === 0 ? 'outline' : String(baseIconNumber)
-            if (result.ischarging) {
-              this.battery = `mdi-battery-charging-${baseIcon}`
-            } else {
-              this.battery = `mdi-battery-${baseIcon}`
-            }
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { ipcRenderer } = require('electron')
+      ipcRenderer.invoke('get-battery').then((result: {
+        hasbattery: boolean;
+        ischarging: boolean;
+        percent: number;
+      }) => {
+        if (result.hasbattery) {
+          this.batteryPercent = result.percent
+          const baseIconNumber = Math.floor(result.percent / 10) * 10
+          const baseIcon = baseIconNumber === 0 ? 'outline' : String(baseIconNumber)
+          if (result.ischarging) {
+            this.battery = `mdi-battery-charging-${baseIcon}`
           } else {
-            this.battery = 'mdi-power-plug'
+            this.battery = `mdi-battery-${baseIcon}`
           }
-        })
+        } else {
+          this.battery = 'mdi-power-plug'
+        }
       })
     }
   }
