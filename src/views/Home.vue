@@ -17,6 +17,7 @@
           无法向服务器发起请求，请检查网络连接并稍后重试。
         </p>
         <v-btn
+          v-if="queryValue"
           small
           color="secondary"
           class="float-right"
