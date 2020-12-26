@@ -1,44 +1,43 @@
 <template>
   <v-app>
-    <v-app-bar app color="indigo" dark>
-      <v-app-bar-title>
-        {{ title }}
-      </v-app-bar-title>
-
-      <v-spacer />
-
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-img class="shrink" src="images/lab_logo.svg"
-                 alt="CSLab Logo" contain width="36"
-                 v-bind="attrs" v-on="on" />
-        </template>
-        <span>一个清华附中高研实验室项目</span>
-      </v-tooltip>
-
-    </v-app-bar>
+    <system-bar />
 
     <v-main class="grey lighten-4">
-      <v-container style="max-width: 50rem;">
+      <v-container>
         <router-view />
       </v-container>
     </v-main>
+
+    <v-footer
+      app
+      absolute
+      padless
+      class="grey lighten-3 grey--text text--darken-3"
+    >
+      <v-col class="text-center">
+        <span class="small">By JingBh / 一个清华附中高研实验室项目</span>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-const title = '图书馆室内引导机器人'
+import SystemBar from '@/components/SystemBar.vue'
+import packageMeta from '@/../package.json'
+
+const title = packageMeta.title
 
 @Component({
+  components: {
+    SystemBar
+  },
   metaInfo: {
     title
   }
 })
 export default class App extends Vue {
-  get title () {
-    return title
-  }
+
 }
 </script>
