@@ -51,20 +51,31 @@ export default class SystemBar extends Vue {
       const { ipcRenderer } = require('electron')
       ipcRenderer.invoke('get-battery').then((result: {
         hasbattery: boolean;
+        acconnected: boolean;
         ischarging: boolean;
         percent: number;
       }) => {
         if (result.hasbattery) {
           this.batteryPercent = result.percent
           const baseIconNumber = Math.floor(result.percent / 10) * 10
-          const baseIcon = baseIconNumber === 0 ? 'outline' : String(baseIconNumber)
-          if (result.ischarging) {
-            this.battery = `mdi-battery-charging-${baseIcon}`
+          if (result.ischarging || result.acconnected) {
+            if (baseIconNumber === 0) {
+              this.battery = 'mdi-battery-charging-outline'
+            } else {
+              this.battery = `mdi-battery-charging-${baseIconNumber}`
+            }
           } else {
-            this.battery = `mdi-battery-${baseIcon}`
+            if (baseIconNumber === 0) {
+              this.battery = 'mdi-battery-alert-variant-outline'
+            } else if (baseIconNumber === 100) {
+              this.battery = 'mdi-battery'
+            } else {
+              this.battery = `mdi-battery-${baseIconNumber}`
+            }
           }
         } else {
           this.battery = 'mdi-power-plug'
+          this.batteryPercent = 0
         }
       })
     }
