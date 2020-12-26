@@ -90,7 +90,7 @@ export default class SystemBar extends Vue {
     this.timers = [
       window.setInterval(this.updateTime, 1000),
       window.setInterval(this.updateBattery, 5000),
-      window.setInterval(this.updateNetwork, 5000)
+      window.setInterval(this.updateNetwork, 500)
     ]
     this.updateTime()
     this.updateBattery()
