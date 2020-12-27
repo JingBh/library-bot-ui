@@ -13,10 +13,13 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 async function createWindow () {
+  const initialFullscreen = process.arch === 'armv7l' || !isDevelopment
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    fullscreen: initialFullscreen,
+    kiosk: initialFullscreen,
     frame: false,
     show: false,
     autoHideMenuBar: true,
@@ -44,6 +47,10 @@ async function createWindow () {
     createProtocol('app')
     // Load the index.html when not in development
     await win.loadURL('app://./index.html')
+  }
+
+  if (initialFullscreen) {
+    win.setFullScreen(true)
   }
 }
 

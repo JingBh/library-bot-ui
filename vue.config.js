@@ -21,9 +21,10 @@ module.exports = {
           }
         },
         linux: {
+          category: 'Education',
           target: {
             target: 'deb',
-            arch: ['x64', 'arm64']
+            arch: 'armv7l'
           }
         }
       },
