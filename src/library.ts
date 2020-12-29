@@ -40,7 +40,7 @@ type BookLocalInfo = APIObject<{
   Price: string; // 价格
 }>
 
-type BookInfo = APIObject<{
+export type BookInfo = APIObject<{
   MainKay: string; // 主键码
   DBKay: string; // 库键码
   BTitle: string; // 题名
@@ -59,7 +59,7 @@ export interface APIResult<T> {
     Msg: string;
     ReturnValue: number;
     Data: T;
-  }>;
+  }>[];
 }
 
 export type SearchBookResult = APIResult<APIList<BookInfo>>
