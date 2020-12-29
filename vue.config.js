@@ -8,17 +8,7 @@ module.exports = {
         appId: 'com.jingbh.library-bot-ui',
         productName: '图书馆室内引导机器人',
         mac: {
-          category: 'public.app-category.education',
-          target: {
-            target: 'dmg',
-            arch: 'x64'
-          }
-        },
-        win: {
-          target: {
-            target: 'nsis',
-            arch: 'x64'
-          }
+          category: 'public.app-category.education'
         },
         linux: {
           category: 'Education',
