@@ -55,6 +55,19 @@
         :value="searchType.value"
       />
     </v-radio-group>
+    <v-slide-y-transition>
+      <div
+        v-if="result"
+        class="mt-4"
+      >
+        <books-list :data="pageData" />
+        <v-pagination
+          v-model="page"
+          class="mt-4"
+          :length="pages"
+        />
+      </div>
+    </v-slide-y-transition>
   </div>
 </template>
 
@@ -64,8 +77,13 @@ import { debounce } from 'lodash'
 import { AxiosResponse } from 'axios'
 
 import { SearchBookResult, SearchType, searchTypes } from '@/library'
+import BooksList from '@/components/BooksList.vue'
 
-@Component
+@Component({
+  components: {
+    BooksList
+  }
+})
 export default class HomePage extends Vue {
   loading = false
   error = false
@@ -74,6 +92,22 @@ export default class HomePage extends Vue {
   queryValue = ''
 
   result: SearchBookResult | null = null
+
+  page = 1
+
+  get pages () {
+    if (this.result?.result[0]) {
+      const count = this.result.result[0].fields.Data.fields.FCount
+      return Math.ceil(count / 5)
+    } else return 0
+  }
+
+  get pageData () {
+    if (this.result?.result[0]) {
+      const data = this.result.result[0].fields.Data.fields.FItems
+      return data.slice((this.page - 1) * 5, this.page * 5)
+    } else return null
+  }
 
   _requestSearch (query: string) {
     this.error = false
