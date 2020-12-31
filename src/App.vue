@@ -4,7 +4,11 @@
 
     <v-main class="grey lighten-4">
       <v-container>
-        <router-view />
+        <v-slide-x-transition>
+          <keep-alive include="HomePage">
+            <router-view />
+          </keep-alive>
+        </v-slide-x-transition>
       </v-container>
     </v-main>
 
