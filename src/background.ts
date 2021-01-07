@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain, protocol } from 'electron'
+import { app, BrowserWindow, ipcMain, protocol, session } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { battery } from 'systeminformation'
@@ -81,6 +81,18 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+
+  session.defaultSession.webRequest.onHeadersReceived({
+    urls: ['http://192.168.100.76:8081/*']
+  }, (details: Electron.OnHeadersReceivedListenerDetails,
+    callback: Function) => {
+    if (details.responseHeaders) {
+      details.responseHeaders['Access-Control-Allow-Origin'] = ['*']
+      // eslint-disable-next-line standard/no-callback-literal
+      callback({ responseHeaders: details.responseHeaders })
+    }
+  })
+
   createWindow()
 })
 
